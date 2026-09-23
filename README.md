@@ -1,3 +1,5 @@
+Still accomodating details, this is *not* the final README
+
 # Soporte-Admin-TIC
 Aplicación para técnicos que presten soporte remoto. 
 
