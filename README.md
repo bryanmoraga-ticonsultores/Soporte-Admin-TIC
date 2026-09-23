@@ -75,7 +75,7 @@ https://aka.ms/vs/17/release/vs_community.exe
 
 Durante la instalación, selecciona el workload **"Desarrollo para el escritorio con C++"**, en la sección **Móviles y de Escritorio**.
 
-![](/.img/vscomm_1.png)
+![](https://github.com/bryanmoraga-ticonsultores/Soporte-Remoto-Admin/blob/main/.img/vscomm_1.png)
 
 Luego, en la sección de la derecha, los únicos que son realmente necesarios son:
 - `Herramientas de compilación de C++ de MSVC...`
@@ -83,7 +83,7 @@ Luego, en la sección de la derecha, los únicos que son realmente necesarios so
 - `SDK de Windows 11` (o el equivalente para windows 10)
 
 
-![](/.img/vscomm_2.png)
+![](https://github.com/bryanmoraga-ticonsultores/Soporte-Remoto-Admin/blob/main/.img/vscomm_2.png)
 
 > **NO** marcar el administrador de paquetes vcpkg integrado.
 
@@ -102,7 +102,7 @@ Los valores son:
 
 Ejecuta el archivo descargado (`rustup-innit.exe`), y prosigue con la instalación de Rust por defecto (presionando *Enter* cuando te lo pida).
 
-![](/.img/rustup_1.png)
+![](https://github.com/bryanmoraga-ticonsultores/Soporte-Remoto-Admin/blob/main/.img/rustup_1.png)
 
 Cuando se complete, en Git Bash se debe hacer esto:
 
@@ -195,11 +195,14 @@ export VCPKG_VISUAL_STUDIO_PATH="C:/Program Files/Microsoft Visual Studio/2022/C
 ### Paso 7 - RustDesk
 ----
 
-Ahora ya tenemos lo necesario, por lo que clonaremos RustDesk:
+Ahora ya tenemos lo necesario, por lo que clonaremos RustDesk, usando los hash definidos al principio del documento:
 ```bash
-git clone --recurse-submodules https://github.com/rustdesk/rustdesk /c/rustdesk
+git clone https://github.com/rustdesk/rustdesk.git /c/rustdesk
 cd /c/rustdesk
-git checkout 1.4.9
+git checkout 91c9fccbb0f7bfe5f11644d5fbdec9b23fa10540
+git submodule update --init --recursive
+cd libs/hbb_common
+git checkout 29cf7cbe4d38ce36020749f713fb066299f02431
 ```
 
 **Sólo para este paso** utilizaremos Rust en su versión estable, y no una predefinida, ya que es posible que la versión que definimos anteriormente puede fallar al descargar esta librería:
@@ -266,7 +269,7 @@ python build.py --flutter
 ## Compilación Paso a Paso (MacOS)
 ### MacOS utilizado Ventura 13, Intel
 
-Guía basada en un proceso real de compilación en macOS Ventura 13 (Intel), a partir de la [guía oficial](https://rustdesk.com/docs/en/dev/build/osx/), con los ajustes necesarios para que funcione en este entorno.
+Guía basada en un proceso realizado de compilación en macOS Ventura 13 (Intel), a partir de la [guía oficial](https://rustdesk.com/docs/en/dev/build/osx/), con los ajustes necesarios para que funcione en este entorno.
 
 > **Nota:** los pasos de la sección [1. Entorno del sistema](#1-entorno-del-sistema-una-sola-vez) se instalan **una sola vez** por máquina. Si vas a compilar un segundo cliente (otro fork/carpeta del mismo repo), puedes saltar directo a la [sección 2](#2-por-cada-proyectocarpeta).
 
@@ -377,8 +380,12 @@ Repite esta sección por cada clon del repo (por ejemplo, si compilas varios bui
 ### 2.1 Clonar el repo
 ```sh
 cd ~/Desktop
-git clone --recurse-submodules https://github.com/rustdesk/rustdesk <nombre-carpeta>
-cd <nombre-carpeta>
+git clone https://github.com/rustdesk/rustdesk.git /c/rustdesk
+cd /c/rustdesk
+git checkout 91c9fccbb0f7bfe5f11644d5fbdec9b23fa10540
+git submodule update --init --recursive
+cd libs/hbb_common
+git checkout 29cf7cbe4d38ce36020749f713fb066299f02431
 ```
 
 ### 2.2 Fijar la versión de Flutter con FVM
@@ -399,6 +406,7 @@ fvm flutter precache --macos
 ```
 
 ### 2.4 Venv para el paquete Python (portable)
+Esto para evitar instalar paquetes en el sistema o globalmente, evitando problemas de sistema.
 ```sh
 cd ../libs/portable
 python3 -m venv venv
@@ -431,26 +439,7 @@ pod install
 cd ../..
 ```
 
-### 2.8 (Opcional) Personalizar nombre y bundle ID
-Antes de compilar, si quieres que la app tenga su propio nombre/identidad (útil si vas a tener varios builds instalados a la vez en el mismo Mac):
-
-**`flutter/macos/Runner/Configs/AppInfo.xcconfig`**
-```
-PRODUCT_NAME = <TuNombreDeApp>
-PRODUCT_BUNDLE_IDENTIFIER = <tu.identificador.unico>
-```
-
-**`flutter/macos/Runner.xcodeproj/project.pbxproj`** — hay 3 ocurrencias hardcodeadas que sobreescriben al `.xcconfig` si no se cambian:
-```sh
-sed -i '' 's/PRODUCT_BUNDLE_IDENTIFIER = com.carriez.rustdesk;/PRODUCT_BUNDLE_IDENTIFIER = <tu.nuevo.identificador>;/g' flutter/macos/Runner.xcodeproj/project.pbxproj
-```
-
-**`libs/hbb_common/src/config.rs`** (opcional, para que los textos de la UI usen tu nombre en vez de "RustDesk"):
-```rust
-pub static ref APP_NAME: RwLock<String> = RwLock::new("<TuNombreDeApp>".to_owned());
-```
-
-### 2.9 Compilar
+### 2.8 Compilar
 ```sh
 python3 ./build.py --flutter
 ```
@@ -458,16 +447,17 @@ Puede tardar 15–40 min. Es normal ver muchos `warning:` (nullability de header
 
 Si compilaste con un nombre de app personalizado (paso 2.8), asegúrate de que tu `build.py` resuelva el nombre real del `.app` en vez de asumir `RustDesk.app` — por ejemplo, leyendo `PRODUCT_NAME` desde `AppInfo.xcconfig`.
 
-### 2.10 Firmar (ad-hoc)
+### 2.9 Firmar (ad-hoc)
 Sin esto, macOS bloquea la app al abrir con `Library Validation failed: ... has no Team ID`:
 ```sh
 codesign --force --deep --sign - "flutter/build/macos/Build/Products/Release/<NombreApp>.app"
 ```
 
-### 2.11 Ejecutar
+### 2.10 Ejecutar
 ```sh
 open "flutter/build/macos/Build/Products/Release/<NombreApp>.app"
 ```
+o con doble click en la aplicación.
 
 ---
 
@@ -492,6 +482,23 @@ open "flutter/build/macos/Build/Products/Release/<NombreApp>.app"
 
 ## Aplicar Cambios en MacOS
 ### Cambios aplicados
+#### Personalizar nombre y bundle ID
+Antes de compilar, si quieres que la app tenga su propio nombre/identidad (útil si vas a tener varios builds instalados a la vez en el mismo Mac):
 
+**`flutter/macos/Runner/Configs/AppInfo.xcconfig`**
+```
+PRODUCT_NAME = <TuNombreDeApp>
+PRODUCT_BUNDLE_IDENTIFIER = <tu.identificador.unico>
+```
+
+**`flutter/macos/Runner.xcodeproj/project.pbxproj`** — hay 3 ocurrencias hardcodeadas que sobreescriben al `.xcconfig` si no se cambian:
+```sh
+sed -i '' 's/PRODUCT_BUNDLE_IDENTIFIER = com.carriez.rustdesk;/PRODUCT_BUNDLE_IDENTIFIER = <tu.nuevo.identificador>;/g' flutter/macos/Runner.xcodeproj/project.pbxproj
+```
+
+**`libs/hbb_common/src/config.rs`** (opcional, para que los textos de la UI usen tu nombre en vez de "RustDesk"):
+```rust
+pub static ref APP_NAME: RwLock<String> = RwLock::new("<TuNombreDeApp>".to_owned());
+```
 
 
