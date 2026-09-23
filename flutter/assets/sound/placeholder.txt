@@ -1,1 +1,1 @@
-
+Here should be the notification sound in WAV format, with 'notification' as it's name.
