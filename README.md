@@ -278,14 +278,18 @@ Guía basada en un proceso realizado de compilación en macOS Ventura 13 (Intel)
 ### 1. Entorno del sistema (una sola vez)
 
 ### 1.1 Xcode Command Line Tools
-```sh
-xcode-select --install
+Para ello, se utiliza:
+```bash
+xcode-select --install 
 ```
 
 ### 1.2 Homebrew
+Para esto puede seguir las instrucciones de la página oficial de [Homebrew](https://brew.sh/)
+<br> O directamente con esta instrucción, obtenida de esta misma:
 ```sh
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 ```
+
 En Mac Intel, Homebrew queda en `/usr/local` y normalmente ya entra al PATH solo. En Apple Silicon habría que agregar `/opt/homebrew/bin` al PATH manualmente.
 
 ### 1.3 Xcode completo (no solo las Command Line Tools)
@@ -445,8 +449,6 @@ python3 ./build.py --flutter
 ```
 Puede tardar 15–40 min. Es normal ver muchos `warning:` (nullability de headers de Swift/Xcode, "Run script build phase" sin outputs) — no son errores, no bloquean el build.
 
-Si compilaste con un nombre de app personalizado (paso 2.8), asegúrate de que tu `build.py` resuelva el nombre real del `.app` en vez de asumir `RustDesk.app` — por ejemplo, leyendo `PRODUCT_NAME` desde `AppInfo.xcconfig`.
-
 ### 2.9 Firmar (ad-hoc)
 Sin esto, macOS bloquea la app al abrir con `Library Validation failed: ... has no Team ID`:
 ```sh
@@ -463,8 +465,6 @@ o con doble click en la aplicación.
 
 #### Notas finales
 
-- **Cada carpeta/clon genera su propio ID de RustDesk** de forma automática, siempre que tenga su propio `PRODUCT_BUNDLE_IDENTIFIER` — no hay conflicto por compilar y correr varios builds en el mismo Mac apuntando al mismo servidor de relay.
-- Para compilar un **segundo cliente** reutilizando el mismo entorno, repite solo la sección 2 en una carpeta nueva — no hace falta reinstalar Homebrew, Xcode, vcpkg, Rust, FVM ni CocoaPods.
 - Si algo falla de forma rara tras cambios de código, antes de investigar a fondo prueba una limpieza:
   ```sh
   # Flutter
@@ -483,12 +483,42 @@ o con doble click en la aplicación.
 ## Aplicar Cambios en MacOS
 ### Cambios aplicados
 #### Personalizar nombre y bundle ID
-Antes de compilar, si quieres que la app tenga su propio nombre/identidad (útil si vas a tener varios builds instalados a la vez en el mismo Mac):
+Los cambios aquí presentes son los que han sido aplicados con efecto de personalizar y/o adaptar el software RustDesk a necesidades específicas.
 
 **`flutter/macos/Runner/Configs/AppInfo.xcconfig`**
 ```
 PRODUCT_NAME = <TuNombreDeApp>
 PRODUCT_BUNDLE_IDENTIFIER = <tu.identificador.unico>
+```
+
+`build.py` Se agrega una función para obtener el nombre de la aplicaión de forma dinámica.
+```python
+def get_mac_app_name():
+    xcconfig_path = 'flutter/macos/Runner/Configs/AppInfo.xcconfig'
+    with open(xcconfig_path, 'r') as f:
+        for line in f:
+            line = line.strip()
+            if line.startswith('PRODUCT_NAME'):
+                name = line.split('=', 1)[1].strip()
+                return f'{name}.app'
+    raise Exception('No se encontró PRODUCT_NAME en AppInfo.xcconfig')
+```
+y se llama a esta función aquí:<br>
+(fragmento)
+```python
+def build_flutter_dmg(version, features):
+    ...
+
+    app_name = get_mac_app_name() #<-- Aquí
+
+    os.chdir('flutter')
+    
+    mac_arch = 'arm64' if platform.machine().lower() in ('arm64', 'aarch64') else 'x86_64'
+    system2(
+        f'FLUTTER_XCODE_ARCHS={mac_arch} FLUTTER_XCODE_ONLY_ACTIVE_ARCH=YES flutter build macos --release')
+        # Para usarse aquí 
+    system2(f'cp -rf ../target/release/service "./build/macos/Build/Products/Release/{app_name}/Contents/MacOS/"') 
+    ...
 ```
 
 **`flutter/macos/Runner.xcodeproj/project.pbxproj`** — hay 3 ocurrencias hardcodeadas que sobreescriben al `.xcconfig` si no se cambian:
