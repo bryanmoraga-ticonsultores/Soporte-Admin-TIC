@@ -1,6 +1,10 @@
 Still accomodating details, this is *not* the final README
+# Índice
+1.[Información](https://github.com/bryanmoraga-ticonsultores/Soporte-Admin-TIC#Informacion)<br>
+2.[Compilar Rustdesk (Sin Modificar) en Windows](https://github.com/bryanmoraga-ticonsultores/Soporte-Admin-TIC#Instalación-Paso-a-Paso-Windows)<br>
 
-# Soporte-Admin-TIC
+# Información
+## Soporte-Admin-TIC
 Aplicación para técnicos que presten soporte remoto. 
 
 Este proyecto toma a [`RustDesk`](https://github.com/rustdesk/rustdesk) (1.4.9) como base, añadiendo funcionalidades para el preste de servicios de soporte remoto. <br>Específicamente:<br>
