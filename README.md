@@ -1,7 +1,18 @@
-Still accomodating details, this is *not* the final README
+Details are still being finalized, this is *not* the final README
 # Índice
-1.[Información](https://github.com/bryanmoraga-ticonsultores/Soporte-Admin-TIC#Informacion)<br>
-2.[Compilar Rustdesk (Sin Modificar) en Windows](https://github.com/bryanmoraga-ticonsultores/Soporte-Admin-TIC#Instalación-Paso-a-Paso-Windows)<br>
+1. [Información](https://github.com/bryanmoraga-ticonsultores/Soporte-Admin-TIC#información)
+
+2. [Compilar Rustdesk (Sin Modificar) en Windows](https://github.com/bryanmoraga-ticonsultores/Soporte-Admin-TIC#Compilación-Paso-a-Paso-Windows)
+
+3. [Compilar Rustdesk (Sin Modificar) en Mac](https://github.com/bryanmoraga-ticonsultores/Soporte-Admin-TIC#Compilación-Paso-a-Paso-MacOS) 
+
+4. [Aplicar cambios en Windows (WIP)]()
+
+    - 4.1 [Cambios aplicados (WIP)]()
+    
+5. [Aplicar cambios en MacOS (WIP)]()
+
+    - 5.1 [Cambios aplicados (WIP)]()
 
 # Información
 ## Soporte-Admin-TIC
@@ -38,7 +49,7 @@ vcpkg | commit fijo | Maneja las librerías nativas (libvpx, opus, ffmpeg, etc.)
 
 Más abajo estarán seccionados los pasos a realizar para Windows y Mac (Linux en proceso)
 
-## Instalación Paso a Paso (Windows)
+# Compilación Paso a Paso (Windows)
 
 ### Preparación
 
@@ -252,7 +263,7 @@ python build.py --flutter
 - Si cambias `.dart` o assets → solo presiona `r` en `flutter run` o corre `build.py` de nuevo
 
 
-## Instalación Paso a Paso (Mac)
+## Compilación Paso a Paso (MacOS)
 ### MacOS utilizado Ventura 13, Intel
 
 Guía basada en un proceso real de compilación en macOS Ventura 13 (Intel), a partir de la [guía oficial](https://rustdesk.com/docs/en/dev/build/osx/), con los ajustes necesarios para que funcione en este entorno.
@@ -472,4 +483,15 @@ open "flutter/build/macos/Build/Products/Release/<NombreApp>.app"
   cargo clean
   ```
 
-## Instalación Paso a Paso (Linux) (En Desarrollo)
+## Compilación Paso a Paso (Linux) (WIP)
+
+## Aplicar Cambios en Windows
+### Cambios aplicados
+
+
+
+## Aplicar Cambios en MacOS
+### Cambios aplicados
+
+
+
