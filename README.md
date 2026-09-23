@@ -1,7 +1,7 @@
 # Soporte-Admin-TIC
 Aplicación para técnicos que presten soporte remoto. 
 
-Este proyecto toma a RustDesk (1.4.9) como base, añadiendo funcionalidades para el preste de servicios de soporte remoto.
+Este proyecto toma a [`RustDesk`](https://github.com/rustdesk/rustdesk) (1.4.9) como base, añadiendo funcionalidades para el preste de servicios de soporte remoto.
 
 Para esto se necesitaría seguir las instrucciones del propio repositorio de rustdesk, que mencionaré aquí en caso de que cambien, para compilar la aplicación usando Flutter (No Sciter):
 
