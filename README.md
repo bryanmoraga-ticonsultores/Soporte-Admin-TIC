@@ -526,9 +526,9 @@ def build_flutter_dmg(version, features):
 sed -i '' 's/PRODUCT_BUNDLE_IDENTIFIER = com.carriez.rustdesk;/PRODUCT_BUNDLE_IDENTIFIER = <tu.nuevo.identificador>;/g' flutter/macos/Runner.xcodeproj/project.pbxproj
 ```
 
-**`libs/hbb_common/src/config.rs`** (opcional, para que los textos de la UI usen tu nombre en vez de "RustDesk"):
+**`libs/hbb_common/src/config.rs`** Para que los textos de la UI usen un nombre personalizado:
 ```rust
-pub static ref APP_NAME: RwLock<String> = RwLock::new("<TuNombreDeApp>".to_owned());
+pub static ref APP_NAME: RwLock<String> = RwLock::new("<NombreDeApp>".to_owned());
 ```
 
 
