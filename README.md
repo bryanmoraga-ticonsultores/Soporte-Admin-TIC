@@ -795,11 +795,11 @@ Este es un módulo completamente nuevo, el cual sólo añade un 'pie de página'
 **`flutter/lib/desktop/pages/support_notifications.dart`**
 Este es un módulo, también completamente nuevo, el cual añade una sección a modo de widget en donde se muestran las notificaciones de solicitud de asistencia por orden de llegada, mostrando el ID del solicitante, la hora de la solicitud y un mensaje (opcional) en el cual el solicitante detalla su problemática.
 
-![](https://github.com/bryanmoraga-ticonsultores/Soporte-Admin-TIC/blob/main/.img/support_widget.png)
+![](.img/support_widget.png)
 >Así es normalmente, cuando no hay solicitudes
 ----
 
-![](https://github.com/bryanmoraga-ticonsultores/Soporte-Admin-TIC/blob/main/.img/support_request.png)
+![](.img/support_request.png)
 >Y así cuando llega una solicitud de asistencia
 
 El botón de conexión es una llamada a la función ya existente que utiliza el propio RustDesk, la cual no ha sido modificada
