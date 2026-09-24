@@ -496,9 +496,9 @@ PRODUCT_NAME = <NombreDeApp>
 PRODUCT_BUNDLE_IDENTIFIER = <tu.identificador.unico>
 ```
 
-**`flutter/macos/Runner.xcodeproj/project.pbxproj`** Usar el *`PRODUCT_BUNDLE_IDENTIFIER`* anterior en las 3 instancias que lo ocupen
-```
-PRODUCT_BUNDLE_IDENTIFIER = <tu.identificador.unico>
+**`flutter/macos/Runner.xcodeproj/project.pbxproj`** — hay 3 ocurrencias hardcodeadas que sobreescriben al `.xcconfig` si no se cambian:
+```sh
+sed -i '' 's/PRODUCT_BUNDLE_IDENTIFIER = com.carriez.rustdesk;/PRODUCT_BUNDLE_IDENTIFIER = <tu.nuevo.identificador>;/g' flutter/macos/Runner.xcodeproj/project.pbxproj
 ```
 
 **`flutter/macos/Runner/AppIcon.icns`** Este es el ícono que se utilizará la `.app`
@@ -553,11 +553,6 @@ def build_flutter_dmg(version, features):
         # Para usarse aquí 
     system2(f'cp -rf ../target/release/service "./build/macos/Build/Products/Release/{app_name}/Contents/MacOS/"') 
     ...
-```
-
-**`flutter/macos/Runner.xcodeproj/project.pbxproj`** — hay 3 ocurrencias hardcodeadas que sobreescriben al `.xcconfig` si no se cambian:
-```sh
-sed -i '' 's/PRODUCT_BUNDLE_IDENTIFIER = com.carriez.rustdesk;/PRODUCT_BUNDLE_IDENTIFIER = <tu.nuevo.identificador>;/g' flutter/macos/Runner.xcodeproj/project.pbxproj
 ```
 
 **`libs/hbb_common/src/config.rs`** (opcional, para que los textos de la UI usen tu nombre en vez de "RustDesk"):
