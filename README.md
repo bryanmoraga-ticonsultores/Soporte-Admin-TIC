@@ -10,9 +10,9 @@ Details are still being finalized, this is *not* the final README
 
     - 4.1 [Cambios aplicados (WIP)]()
     
-5. [Aplicar cambios en MacOS (WIP)]()
+5. [Aplicar cambios en MacOS (WIP)](https://github.com/bryanmoraga-ticonsultores/Soporte-Admin-TIC#aplicar-cambios-en-macos)
 
-    - 5.1 [Cambios aplicados (WIP)]()
+    - 5.1 [Cambios aplicados (WIP)](https://github.com/bryanmoraga-ticonsultores/Soporte-Admin-TIC#cambios-aplicados-1)
 
 # Información
 ## Soporte-Admin-TIC
