@@ -10,7 +10,7 @@ Details are still being finalized, this is *not* the final README
 
     - 4.1 [Cambios aplicados (WIP)]()
     
-5. [Aplicar cambios en MacOS (WIP)](https://github.com/bryanmoraga-ticonsultores/Soporte-Admin-TIC#aplicar-cambios-en-macos)
+5. [Aplicar cambios en MacOS (WIP)]()
 
     - 5.1 [Cambios aplicados (WIP)]()
 
@@ -485,13 +485,47 @@ o con doble click en la aplicación.
 #### Personalizar nombre y bundle ID
 Los cambios aquí presentes son los que han sido aplicados con efecto de personalizar y/o adaptar el software RustDesk a necesidades específicas.
 
+**`src/lang/es.rs`** Se corrige un error de traducción
+```rust
+("Untagged", "Sin etiquetar"), // El codigo original contiene "itiquetar"
+```
+
 **`flutter/macos/Runner/Configs/AppInfo.xcconfig`**
 ```
-PRODUCT_NAME = <TuNombreDeApp>
+PRODUCT_NAME = <NombreDeApp>
 PRODUCT_BUNDLE_IDENTIFIER = <tu.identificador.unico>
 ```
 
-`build.py` Se agrega una función para obtener el nombre de la aplicaión de forma dinámica.
+**`flutter/macos/Runner.xcodeproj/project.pbxproj`** Usar el *`PRODUCT_BUNDLE_IDENTIFIER`* anterior en las 3 instancias que lo ocupen
+```
+PRODUCT_BUNDLE_IDENTIFIER = <tu.identificador.unico>
+```
+
+**`flutter/macos/Runner/AppIcon.icns`** Este es el ícono que se utilizará la `.app`
+Para crear uno, se requiere una carpeta del mismo nombre, `AppIcon.iconset` y una imagen del ícono deseado en 10 tamaños.<br>Aquí un pequeño script, asumiendo el nombre del ícono `Icon.png`:
+```src
+mkdir AppIcon.iconset
+sips -z 16 16     Icon.png --out AppIcon.iconset/icon_16x16.png
+sips -z 32 32     Icon.png --out AppIcon.iconset/icon_16x16@2x.png
+sips -z 32 32     Icon.png --out AppIcon.iconset/icon_32x32.png
+sips -z 64 64     Icon.png --out AppIcon.iconset/icon_32x32@2x.png
+sips -z 128 128   Icon.png --out AppIcon.iconset/icon_128x128.png
+sips -z 256 256   Icon.png --out AppIcon.iconset/icon_128x128@2x.png
+sips -z 256 256   Icon.png --out AppIcon.iconset/icon_256x256.png
+sips -z 512 512   Icon.png --out AppIcon.iconset/icon_256x256@2x.png
+sips -z 512 512   Icon.png --out AppIcon.iconset/icon_512x512.png
+cp Icon.png AppIcon.iconset/icon_512x512@2x.png
+iconutil -c icns AppIcon.iconset
+rm -R AppIcon.iconset
+```
+Puede guardarse como un script, e.g:`CrearIcns.src`, guardarlo en una carpeta junto al `Icon.png`, y en una terminal, ir a la carpeta y ejecutarlo:
+```bash
+cd Ruta/a/carpeta/del/script
+source CrearIcns.src
+```
+Esto dejará el archivo `AppIcon.icns` en dicha carpeta, teniendo que usarse en la ruta correspondiente
+
+**`build.py`** Se agrega una función para obtener el nombre de la aplicaión de forma dinámica.
 ```python
 def get_mac_app_name():
     xcconfig_path = 'flutter/macos/Runner/Configs/AppInfo.xcconfig'
@@ -516,7 +550,7 @@ def build_flutter_dmg(version, features):
     mac_arch = 'arm64' if platform.machine().lower() in ('arm64', 'aarch64') else 'x86_64'
     system2(
         f'FLUTTER_XCODE_ARCHS={mac_arch} FLUTTER_XCODE_ONLY_ACTIVE_ARCH=YES flutter build macos --release')
-        # Para usarse aquí como {app_name}
+        # Para usarse aquí 
     system2(f'cp -rf ../target/release/service "./build/macos/Build/Products/Release/{app_name}/Contents/MacOS/"') 
     ...
 ```
@@ -526,9 +560,238 @@ def build_flutter_dmg(version, features):
 sed -i '' 's/PRODUCT_BUNDLE_IDENTIFIER = com.carriez.rustdesk;/PRODUCT_BUNDLE_IDENTIFIER = <tu.nuevo.identificador>;/g' flutter/macos/Runner.xcodeproj/project.pbxproj
 ```
 
-**`libs/hbb_common/src/config.rs`** Para que los textos de la UI usen un nombre personalizado:
+**`libs/hbb_common/src/config.rs`** (opcional, para que los textos de la UI usen tu nombre en vez de "RustDesk"):
 ```rust
 pub static ref APP_NAME: RwLock<String> = RwLock::new("<NombreDeApp>".to_owned());
 ```
+Y para que se conecte a un servidor personalizado propio
+```rust
+pub const RENDEZVOUS_SERVERS: &[&str] = &["<IP_SERVIDOR>"];
+pub const RS_PUB_KEY: &str = "<KEY_SERVIDOR>";
+```
+
+**`libs/portable/Cargo.toml`** 
+```toml
+[package.metadata.winres]
+LegalCopyright = "<CopyrightDeApp>" # Esto es para efecto de clientes personalizados
+ProductName = "Nombre-de-App"
+OriginalFilename = "Nombre-de-App.exe"
+FileDescription = "NombreDeApp"
+```
+
+**`flutter/pubspec.yaml`** Añadir librerías necesarias para el funcionamiento de las adiciones hechas, al igual que indicar la ruta del audio añadido
+```yaml
+dependencies:
+    audioplayers: ^5.2.1
+    external_path: ^1.0.3
+    web_socket_channel: ^2.4.5
+(...)
+
+flutter:
+    uses-material-design: true
+    assets:
+        - assets/
+        - assets/sound/notification.wav #<--
+```
+
+**`flutter/lib/common.dart`**
+Forzar la conexión al servidor personalizado
+```dart
+//from local options
+    ServerConfig.fromOptions(Map<String, dynamic> options)
+      : idServer = options['<IP_SERVIDOR>'] ?? "",
+        relayServer = options['<IP_SERVIDOR>'] ?? "",
+        apiServer = options['https://<IP_SERVIDOR>'] ?? "",
+        key = options['<KEY_SERVIDOR>'] ?? "";
+
+(...)
+
+// should set one by one
+  await bind.mainSetOption(
+      key: 'custom-rendezvous-server', value: "<IP_SERVIDOR>");
+  await bind.mainSetOption(key: 'relay-server', value: "<IP_SERVIDOR>");
+  await bind.mainSetOption(key: 'api-server', value: "https://<IP_SERVIDOR>");
+  await bind.mainSetOption(key: 'key', value: "<KEY_SERVIDOR>");
+```
+
+**`flutter/lib/common/widgets/connection_page_title.dart`**
+Se adapta el código a un segundo `Expanded` para evitar que el recuadro se superponga al creado.
+
+```dart
+Widget getConnectionPageTitle(BuildContext context, bool isWeb) {
+  return Row(
+    children: [
+      Expanded(
+          child: Row(
+        children: [
+          Expanded (
+            child: AutoSizeText(
+              translate('Control Remote Desktop'),
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+              minFontSize: 12,
+              style: Theme.of(context)
+                  .textTheme
+                  .titleLarge
+                  ?.merge(TextStyle(height: 1)),
+            ).marginOnly(right: 4),
+          ),
+          Tooltip(
+            waitDuration: Duration(milliseconds: 300),
+            message: translate(isWeb ? "web_id_input_tip" : "id_input_tip"),
+            child: Icon(
+              Icons.help_outline_outlined,
+              size: 16,
+              color: Theme.of(context)
+                  .textTheme
+                  .titleLarge
+                  ?.color
+                  ?.withOpacity(0.5),
+            ),
+          ),
+        ],
+      )),
+    ],
+  );
+}
+```
+
+**`flutter/lib/desktop/pages/desktop_home_page.dart`**
+Se oculta/comenta el widget de 'ayuda' debido a problemas visuales provocados por el mismo, al igual que el texto de instalación y el botón de actualización, para evitar confusiones y problemas de desbordamiento, volviendo el proceso más simple y directo.
+
+```dart
+Widget buildHelpCards(String updateUrl) {
+    /**if (!bind.isCustomClient() &&
+        updateUrl.isNotEmpty &&
+        !isCardClosed &&
+        bind.mainUriPrefixSync().contains('rustdesk')) {
+      final isToUpdate = (isWindows || isMacOS) && bind.mainIsInstalled();
+      String btnText = isToUpdate ? 'Update' : 'Download';
+      GestureTapCallback onPressed = () async {
+        final Uri url = Uri.parse('https://rustdesk.com/download');
+        await launchUrl(url);
+      };
+      if (isToUpdate) {
+        onPressed = () {
+          handleUpdate(updateUrl);
+        };
+      }
+      return buildInstallCard(
+          "Status",
+          "${translate("new-version-of-{${bind.mainGetAppNameSync()}}-tip")} (${bind.mainGetNewVersion()}).",
+          btnText,
+          onPressed,
+          closeButton: true,
+          help: isToUpdate ? 'Changelog' : null,
+          link: isToUpdate
+              ? 'https://github.com/rustdesk/rustdesk/releases/tag/${bind.mainGetNewVersion()}'
+              : null);
+    }**/
+    if (systemError.isNotEmpty) {
+      return buildInstallCard("", systemError, "", () {});
+    }
+
+    if (isWindows && !bind.isDisableInstallation()) {
+      if (!bind.mainIsInstalled()) {
+        return buildInstallCard(
+            "", "", "Install",
+            () async {
+          await rustDeskWinManager.closeAllSubWindows();
+          bind.mainGotoInstall();
+        });
+      } else if (bind.mainIsInstalledLowerVersion()) {
+        return buildInstallCard(
+            "", "", "Click to upgrade",
+            () async {
+          await rustDeskWinManager.closeAllSubWindows();
+          bind.mainUpdateMe();
+        });
+      }
+    }
+```
+
+**`flutter/lib/desktop/pages/connection_page.dart`**
+Aquí se incluyen y se modifica el archivo para añadir los módulos originales creados para el presente cliente, los cuales se señalarán a continuación del actual.
+
+```dart
+//Importar los archivos nuevos
+import 'package:flutter_hbb/desktop/pages/support_notifications.dart';
+import 'package:flutter_hbb/desktop/pages/connection_footer.dart';
+
+(...)
+
+@override
+  Widget build(BuildContext context) {
+    final isOutgoingOnly = bind.isOutgoingOnly();
+    return Column(
+      children: [
+        Expanded(
+            child: Column(
+          children: [
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Flexible(child: _buildRemoteIDTextField(context)),
+                SizedBox(width: 20),
+                Expanded(child: SupportNotificationsPanel()), // Módulo nuevo
+              ],
+            ).marginOnly(top: 22),
+            SizedBox(height: 12),
+            Divider().paddingOnly(right: 12),
+            Expanded(child: PeerTabPage()),
+          ],
+        ).paddingOnly(left: 12.0)),
+        if (!isOutgoingOnly) const Divider(height: 1),
+        if (!isOutgoingOnly) 
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Expanded(child: OnlineStatusWidget()),
+              ConnectionFooter(), // Módulo nuevo
+            ],  
+          ),
+      ],
+    );
+  }
+
+  /// Callback for the connect button.
+  /// Connects to the selected peer.
+  void onConnect(
+      {bool isFileTransfer = false,
+      bool isViewCamera = false,
+      bool isTerminal = false}) {
+    var id = _idController.id;
+    connect(context, id,
+        isFileTransfer: isFileTransfer,
+        isViewCamera: isViewCamera,
+        isTerminal: isTerminal);
+  }
+
+(...)
+
+  (
+    '${translate('Terminal')} (beta)',
+    () => onConnect(isTerminal: true)
+  ),
+  // `connect` routes this through the
+  // desktop path only; the peer card gates
+  // it the same way.
+  /*if (isDesktop)
+    (
+      'TCP tunneling',
+      () => onConnect(isTcpTunneling: true)
+  ),*/
+ ]
+```
+
+**`flutter/lib/desktop/pages/connection_footer.dart`**<br>
+Este es un módulo completamente nuevo, el cual sólo añade un 'pie de página', cuya función es informar a los usuarios acerca de los Términos De Uso de esta aplicación personalizada y sobre la Privacidad de los datos.
+
+[]()
 
 
+**`flutter/lib/desktop/pages/support_notifications.dart`**
+Este es un módulo, también completamente nuevo, el cual añade una sección a modo de widget en donde se muestran las notificaciones de solicitud de asistencia por orden de llegada, mostrando el ID del solicitante, la hora de la solicitud y un mensaje (opcional) en el cual el solicitante detalla su problemática.
+
+[]()
