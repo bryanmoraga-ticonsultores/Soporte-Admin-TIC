@@ -788,10 +788,14 @@ import 'package:flutter_hbb/desktop/pages/connection_footer.dart';
 **`flutter/lib/desktop/pages/connection_footer.dart`**<br>
 Este es un módulo completamente nuevo, el cual sólo añade un 'pie de página', cuya función es informar a los usuarios acerca de los Términos De Uso de esta aplicación personalizada y sobre la Privacidad de los datos.
 
-[]()
+[](.img/footer_page.png)
 
 
 **`flutter/lib/desktop/pages/support_notifications.dart`**
 Este es un módulo, también completamente nuevo, el cual añade una sección a modo de widget en donde se muestran las notificaciones de solicitud de asistencia por orden de llegada, mostrando el ID del solicitante, la hora de la solicitud y un mensaje (opcional) en el cual el solicitante detalla su problemática.
 
-[]()
+[](https://github.com/bryanmoraga-ticonsultores/Soporte-Admin-TIC/blob/main/.img/support_widget.png)
+>Así es normalmente
+
+[](https://github.com/bryanmoraga-ticonsultores/Soporte-Admin-TIC/blob/main/.img/support_request.png)
+>Y así cuando llega una solicitud de asistencia
