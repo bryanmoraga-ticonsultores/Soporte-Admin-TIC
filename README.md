@@ -797,4 +797,4 @@ Este es un módulo, también completamente nuevo, el cual añade una sección a 
 ![](.img/support_request.png)
 >Y así cuando llega una solicitud de asistencia
 
-El botón de conexión es una llamada a la función ya existente que utiliza el propio RustDesk, la cual no ha sido modificada
+El botón de conexión es una llamada a la función ya existente que utiliza el propio RustDesk, la cual no ha sido modificada, al igual que el botón de reconexión; reutiliza *`RefreshWidget`*, ya presente en *`peer_tab_page.dart`* de RustDesk original, para la animación de giro.
