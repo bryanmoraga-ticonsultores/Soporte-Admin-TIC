@@ -502,6 +502,7 @@ Los cambios aquí presentes son los que han sido aplicados con efecto de persona
 ```
 PRODUCT_NAME = <NombreDeApp>
 PRODUCT_BUNDLE_IDENTIFIER = <tu.identificador.unico>
+PRODUCT_COPYRIGHT = Copyright © 2026 Purslane Tech Pte. Ltd. Modifications by TiConsultores SpA. All rights reserved.
 ```
 
 **`flutter/macos/Runner.xcodeproj/project.pbxproj`** — hay 3 ocurrencias hardcodeadas que sobreescriben al `.xcconfig` si no se cambian.
@@ -601,7 +602,7 @@ Forzar la conexión al servidor personalizado
 ```
 
 **`flutter/lib/common/widgets/connection_page_title.dart`**
-Se adapta el código a un segundo `Expanded` para evitar que el recuadro se superponga al creado.
+Se adapta el código a un segundo `Expanded` para evitar que el panel de conexión no se superponga al panel de notificaciones creado.
 
 ```dart
 Widget getConnectionPageTitle(BuildContext context, bool isWeb) {
@@ -643,7 +644,7 @@ Widget getConnectionPageTitle(BuildContext context, bool isWeb) {
 ```
 
 **`flutter/lib/desktop/pages/desktop_home_page.dart`**
-Se oculta/comenta el widget de 'ayuda', al igual que el texto de instalación y el botón de actualización, para evitar confusiones y problemas de desbordamiento, volviendo el proceso más simple y directo.
+Se oculta/comenta el widget de 'ayuda', al igual que el texto de instalación y el botón de actualización, para evitar confusiones volver el proceso más simple y directo. (Este es un proceso compartido con la versión de Windows: en MacOS no genera problemas de desbordamiento, puesto que no se ejecuta en una ventana reducida.)
 
 ```dart
 Widget buildHelpCards(String updateUrl) {
@@ -679,7 +680,7 @@ Widget buildHelpCards(String updateUrl) {
 ```
 
 **`flutter/lib/desktop/pages/connection_page.dart`**
-Aquí se incluyen y se modifica el archivo para añadir los módulos originales creados para el presente cliente, los cuales se señalarán a continuación del actual.
+Aquí se incluyen y se modifica el archivo para añadir los módulos originales creados para el presente cliente, los cuales se señalarán a continuación del actual. <br> Se desactiva la opción de "TCP tunneling" del menú, ya que no se expone ningún servicio de este tipo en el uso previsto del cliente, y su ausencia no afecta el resto del funcionamiento.
 
 ```dart
 //Importar los archivos nuevos
@@ -725,15 +726,18 @@ import 'package:flutter_hbb/desktop/pages/connection_footer.dart';
 
   /// Callback for the connect button.
   /// Connects to the selected peer.
+  /// Este bloque habilita el túnel tcp, ahora está comentado y desactivado.
   void onConnect(
       {bool isFileTransfer = false,
       bool isViewCamera = false,
-      bool isTerminal = false}) {
+      bool isTerminal = false,
+      /*bool isTcpTunneling = false*/}) {
     var id = _idController.id;
     connect(context, id,
         isFileTransfer: isFileTransfer,
         isViewCamera: isViewCamera,
         isTerminal: isTerminal);
+        /*isTcpTunneling: isTcpTunneling);*/
   }
 
 (...)
@@ -745,6 +749,7 @@ import 'package:flutter_hbb/desktop/pages/connection_footer.dart';
   // `connect` routes this through the
   // desktop path only; the peer card gates
   // it the same way.
+  // Este bloque habilita el túnel tcp, ahora está comentado y desactivado.
   /*if (isDesktop)
     (
       'TCP tunneling',
@@ -754,7 +759,7 @@ import 'package:flutter_hbb/desktop/pages/connection_footer.dart';
 ```
 
 **`flutter/lib/desktop/pages/connection_footer.dart`**<br>
-Este es un módulo completamente nuevo, el cual sólo añade un 'pie de página', cuya función es informar a los usuarios acerca de los Términos De Uso de esta aplicación personalizada y sobre la Privacidad de los datos.
+Este es un módulo completamente nuevo, el cual sólo añade un 'pie de página', cuya función es informar a los usuarios acerca de los Términos de uso de esta aplicación personalizada y sobre la Privacidad de los datos.
 
 ![](.img/footer_page.png)
 >Adopta el widget de conexión, y al extremo derecho están los enlaces a lo mencionado anteriormente
