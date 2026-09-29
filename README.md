@@ -477,6 +477,14 @@ o con doble click en la aplicación.
 
 ## Aplicar Cambios en Windows
 ### Cambios aplicados
+**`libs/portable/Cargo.toml`** 
+```toml
+[package.metadata.winres]
+LegalCopyright = "<CopyrightDeApp>" # Esto es para efecto de clientes personalizados
+ProductName = "Nombre-de-App"
+OriginalFilename = "Nombre-de-App.exe"
+FileDescription = "NombreDeApp"
+```
 
 
 
@@ -487,7 +495,7 @@ Los cambios aquí presentes son los que han sido aplicados con efecto de persona
 
 **`src/lang/es.rs`** Se corrige un error de traducción
 ```rust
-("Untagged", "Sin etiquetar"), // El codigo original contiene "itiquetar"
+("Untagged", "Sin etiquetar"), // El código original contiene "itiquetar"
 ```
 
 **`flutter/macos/Runner/Configs/AppInfo.xcconfig`**
@@ -496,12 +504,13 @@ PRODUCT_NAME = <NombreDeApp>
 PRODUCT_BUNDLE_IDENTIFIER = <tu.identificador.unico>
 ```
 
-**`flutter/macos/Runner.xcodeproj/project.pbxproj`** — hay 3 ocurrencias hardcodeadas que sobreescriben al `.xcconfig` si no se cambian:
-```sh
-sed -i '' 's/PRODUCT_BUNDLE_IDENTIFIER = com.carriez.rustdesk;/PRODUCT_BUNDLE_IDENTIFIER = <tu.nuevo.identificador>;/g' flutter/macos/Runner.xcodeproj/project.pbxproj
+**`flutter/macos/Runner.xcodeproj/project.pbxproj`** — hay 3 ocurrencias hardcodeadas que sobreescriben al `.xcconfig` si no se cambian.
+<br>Con esto cambia esas 3 ocurrencias del archivo:
+```bash
+sed -i '' 's/PRODUCT_BUNDLE_IDENTIFIER = com.carriez.rustdesk;/PRODUCT_BUNDLE_IDENTIFIER = <tu.identificador.unico>;/g' flutter/macos/Runner.xcodeproj/project.pbxproj
 ```
 
-**`flutter/macos/Runner/AppIcon.icns`** Este es el ícono que se utilizará la `.app`
+**`flutter/macos/Runner/AppIcon.icns`** Este es el ícono que utilizará la `.app`
 Para crear uno, se requiere una carpeta del mismo nombre, `AppIcon.iconset` y una imagen del ícono deseado en 10 tamaños.<br>Aquí un pequeño script, asumiendo el nombre del ícono `Icon.png`:
 ```src
 mkdir AppIcon.iconset
@@ -525,7 +534,7 @@ source CrearIcns.src
 ```
 Esto dejará el archivo `AppIcon.icns` en dicha carpeta, teniendo que usarse en la ruta correspondiente
 
-**`build.py`** Se agrega una función para obtener el nombre de la aplicaión de forma dinámica.
+**`build.py`** Se agrega una función para obtener el nombre de la aplicación de forma dinámica.
 ```python
 def get_mac_app_name():
     xcconfig_path = 'flutter/macos/Runner/Configs/AppInfo.xcconfig'
@@ -543,14 +552,14 @@ y se llama a esta función aquí:<br>
 def build_flutter_dmg(version, features):
     ...
 
-    app_name = get_mac_app_name() #<-- Aquí
+    app_name = get_mac_app_name() # ← Aquí
 
     os.chdir('flutter')
     
     mac_arch = 'arm64' if platform.machine().lower() in ('arm64', 'aarch64') else 'x86_64'
     system2(
         f'FLUTTER_XCODE_ARCHS={mac_arch} FLUTTER_XCODE_ONLY_ACTIVE_ARCH=YES flutter build macos --release')
-        # Para usarse aquí 
+        # Para usarse aquí ↓
     system2(f'cp -rf ../target/release/service "./build/macos/Build/Products/Release/{app_name}/Contents/MacOS/"') 
     ...
 ```
@@ -565,20 +574,10 @@ pub const RENDEZVOUS_SERVERS: &[&str] = &["<IP_SERVIDOR>"];
 pub const RS_PUB_KEY: &str = "<KEY_SERVIDOR>";
 ```
 
-**`libs/portable/Cargo.toml`** 
-```toml
-[package.metadata.winres]
-LegalCopyright = "<CopyrightDeApp>" # Esto es para efecto de clientes personalizados
-ProductName = "Nombre-de-App"
-OriginalFilename = "Nombre-de-App.exe"
-FileDescription = "NombreDeApp"
-```
-
 **`flutter/pubspec.yaml`** Añadir librerías necesarias para el funcionamiento de las adiciones hechas, al igual que indicar la ruta del audio añadido
 ```yaml
 dependencies:
     audioplayers: ^5.2.1
-    external_path: ^1.0.3
     web_socket_channel: ^2.4.5
 (...)
 
@@ -588,19 +587,11 @@ flutter:
         - assets/
         - assets/sound/notification.wav #<--
 ```
+La ruta completa, donde va el audio, es *`flutter/assets/sound/*.wav`* <br> El audio **debe** ser de nombre *`notification.wav`*
 
 **`flutter/lib/common.dart`**
 Forzar la conexión al servidor personalizado
 ```dart
-//from local options
-    ServerConfig.fromOptions(Map<String, dynamic> options)
-      : idServer = options['<IP_SERVIDOR>'] ?? "",
-        relayServer = options['<IP_SERVIDOR>'] ?? "",
-        apiServer = options['https://<IP_SERVIDOR>'] ?? "",
-        key = options['<KEY_SERVIDOR>'] ?? "";
-
-(...)
-
 // should set one by one
   await bind.mainSetOption(
       key: 'custom-rendezvous-server', value: "<IP_SERVIDOR>");
@@ -652,7 +643,7 @@ Widget getConnectionPageTitle(BuildContext context, bool isWeb) {
 ```
 
 **`flutter/lib/desktop/pages/desktop_home_page.dart`**
-Se oculta/comenta el widget de 'ayuda' debido a problemas visuales provocados por el mismo, al igual que el texto de instalación y el botón de actualización, para evitar confusiones y problemas de desbordamiento, volviendo el proceso más simple y directo.
+Se oculta/comenta el widget de 'ayuda', al igual que el texto de instalación y el botón de actualización, para evitar confusiones y problemas de desbordamiento, volviendo el proceso más simple y directo.
 
 ```dart
 Widget buildHelpCards(String updateUrl) {
@@ -684,24 +675,6 @@ Widget buildHelpCards(String updateUrl) {
     }**/
     if (systemError.isNotEmpty) {
       return buildInstallCard("", systemError, "", () {});
-    }
-
-    if (isWindows && !bind.isDisableInstallation()) {
-      if (!bind.mainIsInstalled()) {
-        return buildInstallCard(
-            "", "", "Install",
-            () async {
-          await rustDeskWinManager.closeAllSubWindows();
-          bind.mainGotoInstall();
-        });
-      } else if (bind.mainIsInstalledLowerVersion()) {
-        return buildInstallCard(
-            "", "", "Click to upgrade",
-            () async {
-          await rustDeskWinManager.closeAllSubWindows();
-          bind.mainUpdateMe();
-        });
-      }
     }
 ```
 
@@ -797,4 +770,4 @@ Este es un módulo, también completamente nuevo, el cual añade una sección a 
 ![](.img/support_request.png)
 >Y así cuando llega una solicitud de asistencia
 
-El botón de conexión es una llamada a la función ya existente que utiliza el propio RustDesk, la cual no ha sido modificada, al igual que el botón de reconexión; reutiliza *`RefreshWidget`*, ya presente en *`peer_tab_page.dart`* de RustDesk original, para la animación de giro.
+El botón de reconexión reutiliza *`RefreshWidget`*, ya presente en *`peer_tab_page.dart`*, para la animación de giro. El botón de conexión llama a la función original de RustDesk, sin modificarla.
