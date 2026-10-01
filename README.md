@@ -504,6 +504,7 @@ PRODUCT_NAME = <NombreDeApp>
 PRODUCT_BUNDLE_IDENTIFIER = <tu.identificador.unico>
 PRODUCT_COPYRIGHT = Copyright © 2026 Purslane Tech Pte. Ltd. Modifications by TiConsultores SpA. All rights reserved.
 ```
+> `<NombreDeApp>` no debe contener espacios, sólo caracteres alfanuméricos y guiones(`_`, `-`)
 
 **`flutter/macos/Runner.xcodeproj/project.pbxproj`** — hay 3 ocurrencias hardcodeadas que sobreescriben al `.xcconfig` si no se cambian.
 <br>Con esto cambia esas 3 ocurrencias del archivo:
@@ -533,7 +534,7 @@ Puede guardarse como un script, e.g:`CrearIcns.src`, guardarlo en una carpeta ju
 cd Ruta/a/carpeta/del/script
 source CrearIcns.src
 ```
-Esto dejará el archivo `AppIcon.icns` en dicha carpeta, teniendo que usarse en la ruta correspondiente
+Esto dejará el archivo `AppIcon.icns` en dicha carpeta, teniendo que usarse en la ruta correspondiente (`flutter/macos/Runner/AppIcon.icns`)
 
 **`build.py`** Se agrega una función para obtener el nombre de la aplicación de forma dinámica.
 ```python
@@ -588,7 +589,7 @@ flutter:
         - assets/
         - assets/sound/notification.wav #<--
 ```
-La ruta completa, donde va el audio, es *`flutter/assets/sound/*.wav`* <br> El audio **debe** ser de nombre *`notification.wav`*
+La ruta completa, donde va el audio, es *`flutter/assets/sound/notification.wav` <br> El audio **debe** ser de nombre *`notification.wav`*
 
 **`flutter/lib/common.dart`**
 Forzar la conexión al servidor personalizado
