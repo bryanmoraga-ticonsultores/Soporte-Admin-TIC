@@ -486,8 +486,6 @@ OriginalFilename = "Nombre-de-App.exe"
 FileDescription = "NombreDeApp"
 ```
 
-
-
 ## Aplicar Cambios en MacOS
 ### Cambios aplicados
 #### Personalizar nombre y bundle ID
@@ -535,6 +533,15 @@ cd Ruta/a/carpeta/del/script
 source CrearIcns.src
 ```
 Esto dejará el archivo `AppIcon.icns` en dicha carpeta, teniendo que usarse en la ruta correspondiente (`flutter/macos/Runner/AppIcon.icns`)
+
+**`/res/*.png`**
+En esta carpeta se deben ajustar `mac-icon.png`, `mac-tray-dark-x2.png` y `mac-tray-light-x2.png`, esto para una mejor visualización del ícono en la barra de menús.<br>Cada uno tiene un tamaño:
+
+
+`mac-icon.png` | `mac-tray-dark-x2.png` | `mac-tray-light-x2.png`
+----|----|----|
+`1024x1024 px` | `60x60 px` | `48x48 px` |
+
 
 **`build.py`** Se agrega una función para obtener el nombre de la aplicación de forma dinámica.
 ```python
