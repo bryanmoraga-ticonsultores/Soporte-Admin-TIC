@@ -512,7 +512,7 @@ sed -i '' 's/PRODUCT_BUNDLE_IDENTIFIER = com.carriez.rustdesk;/PRODUCT_BUNDLE_ID
 ```
 
 **`flutter/macos/Runner/AppIcon.icns`** Este es el ícono que utilizará la `.app`
-Para crear uno, se requiere una carpeta del mismo nombre, `AppIcon.iconset` y una imagen del ícono deseado en 10 tamaños.<br>Aquí un pequeño script, asumiendo el nombre del ícono `Icon.png`:
+Para crear uno, se requiere una carpeta del mismo nombre, `AppIcon.iconset` y una imagen del ícono deseado en 10 tamaños.<br>Aquí un pequeño script usando una imagen png del ícono deseado de dimensiones `1024x1024 px`, asumiendo el nombre del ícono `Icon.png`:
 ```src
 mkdir AppIcon.iconset
 sips -z 16 16     Icon.png --out AppIcon.iconset/icon_16x16.png
