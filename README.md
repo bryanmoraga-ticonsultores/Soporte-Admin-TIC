@@ -35,16 +35,28 @@ Para esto se necesitaría seguir las instrucciones del propio repositorio de rus
 Para efectos prácticos se utilizará la herramienta [`Git Bash`](https://git-scm.com/install/windows) para el cliente de Windows.
 
 Las herramientas base para compilar el programa, obviando la anterior mencionada, serán:
-
 ----
+## Windows
 Herramienta | Versión | Notas
 ----|----|----|
 Visual Studio Community | 2022 (v. 17), workload "Desarrollo para escritorio con C++" | Necesario para MSVC |
 Rust(`rustup-innit.exe`) | toolchain `1.75` | El CI de RustDesk fija esta versión para la app |
 LLVM | `15.0.6` | Para `bindgen`/`rust-bindgen` |
 Flutter SDK | `3.24.5`(canal stable) | **NO** usar `master`/`beta`, RustDesk depende de una verión exacta |
-Python 3 | cualquier reciente | Para ejecutar `build.py` |
-vcpkg | commit fijo | Maneja las librerías nativas (libvpx, opus, ffmpeg, etc.)
+Python 3 | cualquier versión reciente | Para ejecutar `build.py`. <br>En nuestro caso se utilizó la versión `3.11.9` |
+vcpkg | commit fijo | Maneja las librerías nativas (`libvpx`, `opus`, `ffmpeg`, etc.)
+----
+
+## MacOs
+Herramienta | Versión | Notas
+----|----|----|
+Xcode| La versión mas reciente, mientras sea esta compatible con el OS | En nuestro caso, se utilizó la versión `15.2` (MacOs Ventura 13.7)|
+Rust(`rustup-innit`) | `1.75.0` | El CI de RustDesk fija esta versión |
+Git | La más reciente | A diferencia de windows, esto es como librería, sin la terminal integrada de git bash. <br>A la fecha (6/Oct/'26): `2.39.3` |
+Homebrew | La más reciente | Para instalar los paquetes requeridos. <br>A la fecha (6/Oct/'26): `6.0.19` |
+Python 3 | cualquier versión reciente | Para ejecutar `build.py`. <br>En nuestro caso, `3.14.7`. |
+vcpkg | commit fijo | Maneja las librerías necesarias (`libvpx`, `opus`, `libyuv`, `aom`) |
+Flutter (Vía FVM *(Flutter Version Manager)*) | Flutter: `3.24.5`.<br>FVM: la más reciente | RustDesk depende de una versión de Flutter específica, y FVM permite el manejo entre diferentes versiones.<br> Versión FVM a la fecha(6/Oct/26): `4.3.0` |
 ----
 
 Más abajo estarán seccionados los pasos a realizar para Windows y Mac (Linux en proceso)
