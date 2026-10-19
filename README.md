@@ -20,7 +20,12 @@ Details are still being finalized, this is *not* the final README
 ## Soporte-Admin-TIC
 Aplicación para técnicos que presten soporte remoto. 
 
-Este proyecto toma a **RustDesk** [<img src="/.img/external-link.png" alt="External Link" title="Abrir en una nueva pestaña" width="18" heigth="18">](https://github.com/rustdesk/rustdesk) [^1] (1.4.9) como base, añadiendo funcionalidades para el preste de servicios de soporte remoto. <br>Específicamente:<br>
+Este proyecto toma a **RustDesk** [<img src="/.img/external-link.png" alt="External Link" title="Abrir en una nueva pestaña" width="18" heigth="18">](https://github.com/rustdesk/rustdesk) [^1] (1.4.9) como base, añadiendo funcionalidades para el preste de servicios de soporte remoto. 
+
+- Términos de Uso [<img src="/.img/external-link.png" alt="External Link" title="Abrir en una nueva pestaña" width="18" heigth="18">](https://ticonsultores.cl/terms.html)
+- Términos de Privacidad [<img src="/.img/external-link.png" alt="External Link" title="Abrir en una nueva pestaña" width="18" heigth="18">](https://ticonsultores.cl/privacy.html)
+
+<br>Versiones Específicas:<br>
 
 - RustDesk: <br> commit <`6c578292e8ebbbec708b76986ba8c4bc7c509747`> `Windows`<br> commit <`91c9fccbb0f7bfe5f11644d5fbdec9b23fa10540`> `MacOS` 
 
