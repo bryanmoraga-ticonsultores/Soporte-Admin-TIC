@@ -609,4 +609,4 @@ El botón de reconexión reutiliza *`RefreshWidget`*, ya presente en *`peer_tab_
 
 [^1]: External-link icon created by Dixit Lakhani_02 - Flaticon
 [^2]: Por Larry Ewing (<a rel="nofollow" class="external text" href="mailto:lewing@isc.tamu.edu">lewing@isc.tamu.edu</a>) and <a href="https://en.wikipedia.org/wiki/GIMP" class="extiw" title="w:GIMP">The GIMP</a>, Attribution, <a href="https://commons.wikimedia.org/w/index.php?curid=753970">Enlace</a>
-[^3]: Utilizo el símbolo '~' para decir 'Alrededor'. E.g.: "~ Ln. 84" sería "Alrededor de la línea 84".
+[^3]: Utilizo el símbolo '\~' para decir 'Alrededor'. E.g.: "\~ Ln. 84" sería: "Alrededor de la línea 84".
