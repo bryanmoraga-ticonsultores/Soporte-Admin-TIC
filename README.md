@@ -4,15 +4,17 @@ Details are still being finalized, this is *not* the final README
 
 2. [Compilar Rustdesk (Sin Modificar)](#compilar-rustdesk-sin-modificar)
 
-3. [Cambios al Código Origina](#cambios-al-código-original)
+3. [Cambios al Código Original](#cambios-al-código-original)
 
-    - 3.1 [Aplicar cambios en Windows (WIP)](#aplicar-cambios-en-windows)
+    - 3.1 [Cambios Generales](#cambios-generales)
 
-    - 3.2 [Cambios aplicados (WIP)](#cambios-aplicados)
+    - 3.2 [Aplicar cambios en Windows (WIP)](#aplicar-cambios-en-windows)
+
+    - 3.3 [Cambios aplicados (WIP)](#cambios-aplicados)
     
-5. [Aplicar cambios en MacOS (WIP)](#aplicar-cambios-en-macos)
+    - 3.4 [Aplicar cambios en MacOS (WIP)](#aplicar-cambios-en-macos)
 
-    - 4.1 [Cambios aplicados (WIP)](#cambios-aplicados-1)
+    - 3.5 [Cambios aplicados (WIP)](#cambios-aplicados-1)
 
 # Información
 ## Soporte-Admin-TIC
@@ -92,16 +94,79 @@ Aquí abajo estarán los pasos a realizar para Windows y Mac (Linux en proceso)
 
 # Cambios al código original
 
-## Cambio general
+## Cambios generales
+Cambios que van en todas las versiones (Act. Win & Mac)
+
 **`src/lang/es.rs`** Se corrige un error de traducción
 ```rust
 ("Untagged", "Sin etiquetar"), // El código original contiene "itiquetar"
 ```
 
+**`flutter/lib/common/widgets/connection_page_title.dart`**
+Se adapta el código a un segundo `Expanded` para evitar que el panel de conexión no se superponga al panel de notificaciones creado.
+
+```dart
+Widget getConnectionPageTitle(BuildContext context, bool isWeb) {
+  return Row(
+    children: [
+      Expanded(
+          child: Row(
+        children: [
+          Expanded (
+            child: AutoSizeText(
+              translate('Control Remote Desktop'),
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+              minFontSize: 12,
+              style: Theme.of(context)
+                  .textTheme
+                  .titleLarge
+                  ?.merge(TextStyle(height: 1)),
+            ).marginOnly(right: 4),
+          ),
+          Tooltip(
+            waitDuration: Duration(milliseconds: 300),
+            message: translate(isWeb ? "web_id_input_tip" : "id_input_tip"),
+            child: Icon(
+              Icons.help_outline_outlined,
+              size: 16,
+              color: Theme.of(context)
+                  .textTheme
+                  .titleLarge
+                  ?.color
+                  ?.withOpacity(0.5),
+            ),
+          ),
+        ],
+      )),
+    ],
+  );
+}
+```
+
+**`flutter/pubspec.yaml`**
+```yaml
+# (...)
+flutter:
+#(...)
+    assets:
+        - assets/
+        - assets/sounds/notification.wav
+```
+La ruta completa, donde va el audio, es *`flutter/assets/sound/notification.wav` <br> El audio **debe** ser de nombre *`notification.wav`*
+
 ## Aplicar Cambios en Windows
 ### Cambios aplicados
 En esta sección se especifican los cambios realizados para el cliente RustDesk que se hicieron en Windows con efecto de personalizar y/o adaptar el software RustDesk a necesidades específicas. 
 
+**`flutter/pubspec.yaml`**
+```yaml
+dependencies:
+# (...)
+    win32: ^5.10.1 # ~Ln 84
+    web_socket_channel: ^2.1.4 # +
+    windows_taskbar: ^1.1.2
+```
 
 **`libs/portable/Cargo.toml`** 
 ```toml
@@ -211,13 +276,7 @@ dependencies:
     web_socket_channel: ^2.4.5
 (...)
 
-flutter:
-    uses-material-design: true
-    assets:
-        - assets/
-        - assets/sound/notification.wav #<--
 ```
-La ruta completa, donde va el audio, es *`flutter/assets/sound/notification.wav` <br> El audio **debe** ser de nombre *`notification.wav`*
 
 **`flutter/lib/common.dart`**
 Forzar la conexión al servidor personalizado
@@ -228,48 +287,6 @@ Forzar la conexión al servidor personalizado
   await bind.mainSetOption(key: 'relay-server', value: "<IP_SERVIDOR>");
   await bind.mainSetOption(key: 'api-server', value: "https://<IP_SERVIDOR>");
   await bind.mainSetOption(key: 'key', value: "<KEY_SERVIDOR>");
-```
-
-**`flutter/lib/common/widgets/connection_page_title.dart`**
-Se adapta el código a un segundo `Expanded` para evitar que el panel de conexión no se superponga al panel de notificaciones creado.
-
-```dart
-Widget getConnectionPageTitle(BuildContext context, bool isWeb) {
-  return Row(
-    children: [
-      Expanded(
-          child: Row(
-        children: [
-          Expanded (
-            child: AutoSizeText(
-              translate('Control Remote Desktop'),
-              maxLines: 1,
-              overflow: TextOverflow.ellipsis,
-              minFontSize: 12,
-              style: Theme.of(context)
-                  .textTheme
-                  .titleLarge
-                  ?.merge(TextStyle(height: 1)),
-            ).marginOnly(right: 4),
-          ),
-          Tooltip(
-            waitDuration: Duration(milliseconds: 300),
-            message: translate(isWeb ? "web_id_input_tip" : "id_input_tip"),
-            child: Icon(
-              Icons.help_outline_outlined,
-              size: 16,
-              color: Theme.of(context)
-                  .textTheme
-                  .titleLarge
-                  ?.color
-                  ?.withOpacity(0.5),
-            ),
-          ),
-        ],
-      )),
-    ],
-  );
-}
 ```
 
 **`flutter/lib/desktop/pages/desktop_home_page.dart`**
