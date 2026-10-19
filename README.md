@@ -2,7 +2,7 @@ Details are still being finalized, this is *not* the final README
 # Índice
 1. [Información](https://github.com/bryanmoraga-ticonsultores/Soporte-Admin-TIC#información)
 
-2. [Compilar Rustdesk (Sin Modificar)](https://github.com/bryanmoraga-ticonsultores/Soporte-Admin-TIC#compilar-rustdesk-(sin-modificar))
+2. [Compilar Rustdesk (Sin Modificar)](https://github.com/bryanmoraga-ticonsultores/Soporte-Admin-TIC/blob/main/README.md#compilar-rustdesk-sin-modificar)
 
 3. [Aplicar cambios en Windows (WIP)]()
 
