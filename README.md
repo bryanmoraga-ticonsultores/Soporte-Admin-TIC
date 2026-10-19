@@ -2,17 +2,17 @@ Details are still being finalized, this is *not* the final README
 # Índice
 1. [Información](#información)
 
-2. [Compilar Rustdesk (Sin Modificar)](https://github.com/bryanmoraga-ticonsultores/Soporte-Admin-TIC/blob/main/README.md#compilar-rustdesk-sin-modificar)
+2. [Compilar Rustdesk (Sin Modificar)](#compilar-rustdesk-sin-modificar)
 
-3. [Cambios al Código Origina](https://github.com/bryanmoraga-ticonsultores/Soporte-Admin-TIC/blob/main/README.md#cambios-al-código-original)
+3. [Cambios al Código Origina](#cambios-al-código-original)
 
-    - 3.1 [Aplicar cambios en Windows (WIP)]()
+    - 3.1 [Aplicar cambios en Windows (WIP)](#aplicar-cambios-en-windows)
 
-    - 3.2 [Cambios aplicados (WIP)]()
+    - 3.2 [Cambios aplicados (WIP)](#cambios-aplicados)
     
-5. [Aplicar cambios en MacOS (WIP)](https://github.com/bryanmoraga-ticonsultores/Soporte-Admin-TIC#aplicar-cambios-en-macos)
+5. [Aplicar cambios en MacOS (WIP)](#aplicar-cambios-en-macos)
 
-    - 4.1 [Cambios aplicados (WIP)](https://github.com/bryanmoraga-ticonsultores/Soporte-Admin-TIC#cambios-aplicados-1)
+    - 4.1 [Cambios aplicados (WIP)](#cambios-aplicados-1)
 
 # Información
 ## Soporte-Admin-TIC
