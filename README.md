@@ -1,14 +1,16 @@
 Details are still being finalized, this is *not* the final README
 # Índice
-1. [Información](https://github.com/bryanmoraga-ticonsultores/Soporte-Admin-TIC#información)
+1. [Información](#información)
 
 2. [Compilar Rustdesk (Sin Modificar)](https://github.com/bryanmoraga-ticonsultores/Soporte-Admin-TIC/blob/main/README.md#compilar-rustdesk-sin-modificar)
 
-3. [Aplicar cambios en Windows (WIP)]()
+3. [Cambios al Código Origina](https://github.com/bryanmoraga-ticonsultores/Soporte-Admin-TIC/blob/main/README.md#cambios-al-código-original)
 
-    - 3.1 [Cambios aplicados (WIP)]()
+    - 3.1 [Aplicar cambios en Windows (WIP)]()
+
+    - 3.2 [Cambios aplicados (WIP)]()
     
-4. [Aplicar cambios en MacOS (WIP)](https://github.com/bryanmoraga-ticonsultores/Soporte-Admin-TIC#aplicar-cambios-en-macos)
+5. [Aplicar cambios en MacOS (WIP)](https://github.com/bryanmoraga-ticonsultores/Soporte-Admin-TIC#aplicar-cambios-en-macos)
 
     - 4.1 [Cambios aplicados (WIP)](https://github.com/bryanmoraga-ticonsultores/Soporte-Admin-TIC#cambios-aplicados-1)
 
@@ -88,7 +90,9 @@ Aquí abajo estarán los pasos a realizar para Windows y Mac (Linux en proceso)
     <br>[<a href="/docs/ES/COMPILAR_WIN.md">Compilar en Windows (Sin modificaciones)</a>] | [<a href="/docs/ES/COMPILAR_MAC.md">Compilar en MacOS (Sin modificaciones)</a>] | <a href="/docs/ES/COMPILAR_LINUX.md">Compilar en Linux (Sin modificaciones)</a>
 </p>
 
-##Cambio general
+# Cambios al código original
+
+## Cambio general
 **`src/lang/es.rs`** Se corrige un error de traducción
 ```rust
 ("Untagged", "Sin etiquetar"), // El código original contiene "itiquetar"
