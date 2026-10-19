@@ -488,7 +488,6 @@ OriginalFilename = "Nombre-de-App.exe"
 
 ## Aplicar Cambios en MacOS
 ### Cambios aplicados
-#### Personalizar nombre y bundle ID
 Los cambios aquí presentes son los que han sido aplicados con efecto de personalizar y/o adaptar el software RustDesk a necesidades específicas.
 
 **`/flutter/macos/Runner/Configs/AppInfo.xcconfig`**
