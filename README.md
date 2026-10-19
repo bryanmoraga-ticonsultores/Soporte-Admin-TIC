@@ -18,7 +18,7 @@ Details are still being finalized, this is *not* the final README
 ## Soporte-Admin-TIC
 Aplicación para técnicos que presten soporte remoto. 
 
-Este proyecto toma a **RustDesk** [<img src="/.img/external-link.png" alt="External Link" width="18" heigth="18">](https://github.com/rustdesk/rustdesk) (1.4.9) como base, añadiendo funcionalidades para el preste de servicios de soporte remoto. <br>Específicamente:<br>
+Este proyecto toma a **RustDesk** [<img src="/.img/external-link.png" alt="External Link" title="Abrir en una nueva pestaña" width="18" heigth="18">](https://github.com/rustdesk/rustdesk) [^1] (1.4.9) como base, añadiendo funcionalidades para el preste de servicios de soporte remoto. <br>Específicamente:<br>
 
 - RustDesk: <br> commit <`6c578292e8ebbbec708b76986ba8c4bc7c509747`> `Windows`<br> commit <`91c9fccbb0f7bfe5f11644d5fbdec9b23fa10540`> `MacOS` 
 
@@ -47,7 +47,7 @@ libs/hbb_common (driver-390-g29cf7cb)
 
 Para esto se necesitaría seguir las instrucciones del propio repositorio de rustdesk, que mencionaré aquí en caso de que cambien, para compilar la aplicación usando Flutter (No Sciter):
 
-Para efectos prácticos se utilizará la herramienta **Git Bash** [<img src="/.img/external-link.png" alt="External Link" width="18" heigth="18">](https://git-scm.com/install/windows) para el cliente de Windows.
+Para efectos prácticos se utilizará la herramienta **Git Bash** [<img src="/.img/external-link.png" alt="External Link" title="Abrir en una nueva pestaña" width="18" heigth="18">](https://git-scm.com/install/windows) para el cliente de Windows.
 
 Las herramientas base para compilar el programa, obviando la anterior mencionada, serán:
 ----
@@ -117,7 +117,7 @@ Luego, en la sección de la derecha, los únicos que son realmente necesarios so
 ### Paso 2 - Rust
 ----
 
-Luego, instalar [Rust](https://rust-lang.org/es/tools/install/) compatible con tu arquitectura de sistema. Puedes revisar esto último desde el propio Git Bash:
+Luego, instalar **Rust** [<img src="/.img/external-link.png" alt="External Link" title="Abrir en una nueva pestaña" width="18" heigth="18">](https://rust-lang.org/es/tools/install/) compatible con tu arquitectura de sistema. Puedes revisar esto último desde el propio Git Bash:
 
 ```bash
 echo $PROCESSOR_ARCHITECTURE
@@ -142,7 +142,7 @@ rustup default 1.75
 ### Paso 3 - LLVM
 ----
 
-Ahora hay que descargar LLVM 15.0.6. Puede ser encontrado en su [Github](https://github.com/llvm/llvm-project/releases/tag/llvmorg-15.0.6), en la sección de `Assets`, el archivo del mismo nombre correspondiente a la arquitectura de la computadora.
+Ahora hay que descargar LLVM 15.0.6. Puede ser encontrado en su **Github** [<img src="/.img/external-link.png" alt="External Link" title="Abrir en una nueva pestaña" width="18" heigth="18">](https://github.com/llvm/llvm-project/releases/tag/llvmorg-15.0.6), en la sección de `Assets`, el archivo del mismo nombre correspondiente a la arquitectura de la computadora.
 
 Luego ejecute el instalador, y siga con la instalación. 
 
@@ -296,7 +296,7 @@ python build.py --flutter
 ## Compilación Paso a Paso (MacOS)
 ### MacOS utilizado Ventura 13, Intel
 
-Guía basada en un proceso realizado de compilación en macOS Ventura 13 (Intel), a partir de la [guía oficial](https://rustdesk.com/docs/en/dev/build/osx/), con los ajustes necesarios para que funcione en este entorno.
+Guía basada en un proceso realizado de compilación en macOS Ventura 13 (Intel), a partir de la **guía oficial** [<img src="/.img/external-link.png" alt="External Link" title="Abrir en una nueva pestaña" width="18" heigth="18">](https://rustdesk.com/docs/en/dev/build/osx/), con los ajustes necesarios para que funcione en este entorno.
 
 > **Nota:** los pasos de la sección [1. Entorno del sistema](#1-entorno-del-sistema-una-sola-vez) se instalan **una sola vez** por máquina. Si vas a compilar un segundo cliente (otro fork/carpeta del mismo repo), puedes saltar directo a la [sección 2](#2-por-cada-proyectocarpeta).
 
@@ -311,7 +311,7 @@ xcode-select --install
 ```
 
 ### 1.2 Homebrew
-Para esto puede seguir las instrucciones de la página oficial de [Homebrew](https://brew.sh/)
+Para esto puede seguir las instrucciones de la página oficial de **Homebrew** [<img src="/.img/external-link.png" alt="External Link" title="Abrir en una nueva pestaña" width="18" heigth="18">](https://brew.sh/)
 <br> O directamente con esta instrucción, obtenida de esta misma:
 ```sh
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
@@ -504,6 +504,9 @@ o con doble click en la aplicación.
 
 ## Aplicar Cambios en Windows
 ### Cambios aplicados
+
+
+
 **`libs/portable/Cargo.toml`** 
 ```toml
 [package.metadata.winres]
@@ -811,3 +814,6 @@ Este es un módulo, también completamente nuevo, el cual añade una sección a 
 >Y así cuando llega una solicitud de asistencia
 
 El botón de reconexión reutiliza *`RefreshWidget`*, ya presente en *`peer_tab_page.dart`*, para la animación de giro. El botón de conexión llama a la función original de RustDesk, sin modificarla.
+
+
+[^1]: External-link icon created by Dixit Lakhani_02 - Flaticon
