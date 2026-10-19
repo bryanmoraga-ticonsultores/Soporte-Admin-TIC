@@ -90,6 +90,8 @@ Aquí abajo estarán los pasos a realizar para Windows y Mac (Linux en proceso)
     <img src="/.img/Tux.svg" alt="Linux Logo" width="100" height="120" title="Tux, la mascota de Linux, por Larry Ewing, utilizando el programa GIMP."><a href="https://www.home.unix-ag.org/simon/penguin/README" title="Copyright Page of Tux">&copy;</a>
 </p>
 
+[^2]
+
 <p align="center">
     <br>[<a href="/docs/ES/COMPILAR_WIN.md">Compilar en Windows (Sin modificaciones)</a>] | [<a href="/docs/ES/COMPILAR_MAC.md">Compilar en MacOS (Sin modificaciones)</a>] | <a href="/docs/ES/COMPILAR_LINUX.md">Compilar en Linux (Sin modificaciones)(WIP)</a>
 </p>
@@ -322,7 +324,7 @@ Luego, debe crearse el gráfico vectorial del Logo (`.svg`), usando el programa 
 Para esto, se abre el programa, y dentro de este se abre la imagen del logo (En este caso, `Logo.png`).
 
 <p align="center"> 
-    <img src="/.img/InkScape_1.png">
+    <img src="/.img/InkScape_1.png" width="500" height="450">
 </p>
 
 Importar con las configuraciones por defecto.
@@ -334,25 +336,25 @@ Importar con las configuraciones por defecto.
 Una vez allí, seleccionar el logo, con el click principal. (Se notará con un recuadro interlineado.)
 
 <p align="center"> 
-    <img src="/.img/InkScape_3.png">
+    <img src="/.img/InkScape_3.png" width="900" height="530">
 </p>
 
 Ir a la sección 'Trayecto' y seleccionar 'Vectorizar mapa de bits'. *(Dependiendo de la traducción, puede ser 'Trazado' y 'Trazado de mapa de bits' respectivamente)*
 
 <p align="center"> 
-    <img src="/.img/InkScape_4.png">
+    <img src="/.img/InkScape_4.png" width="900" height="530">
 </p>
 
 En 'Modo de detección', puede variar dependiendo de la imagen, más normalmente con 'Autotrazo' debería funcionar.
 
 <p align="center"> 
-    <img src="/.img/InkScape_5.png">
+    <img src="/.img/InkScape_5.png" width="900" height="530">
 </p>
 
 Al aplicar se creará el gráfico vectorizado encima de la imagen. Puede identificar cuál es la imagen vectorizada con la información expuesta en la barra de abajo, y en el nombre del archivo generado.
 
 <p align="center">
-    <img src="/.img/InkScape_6.png">
+    <img src="/.img/InkScape_6.png" width="900" height="530">
 </p>
 
 Ya para finalizar, seleccionar la opción 'Inkscape SVG', escoger la carpeta de destino, ajustar el tamaño para cada `.svg` y exportar la selección.
@@ -365,12 +367,12 @@ Los tamaños son:
 ```
 
 <p align="center">
-    <img src="/.img/InkScape_7.png">
+    <img src="/.img/InkScape_7.png" width="900" height="530">
 </p>
 
 ----
 
-**`/flutter/pubspec.yaml`**[^3]
+**`/flutter/pubspec.yaml`** [^3]
 ```yaml
 dependencies:
 # (...)
