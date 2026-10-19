@@ -18,7 +18,7 @@ Details are still being finalized, this is *not* the final README
 ## Soporte-Admin-TIC
 Aplicación para técnicos que presten soporte remoto. 
 
-Este proyecto toma a [**`RustDesk`**](https://github.com/rustdesk/rustdesk) (1.4.9) como base, añadiendo funcionalidades para el preste de servicios de soporte remoto. <br>Específicamente:<br>
+Este proyecto toma a **RustDesk**[<img src="/.img/external-link.png" alt="External Link" width="18" heigth="18">](https://github.com/rustdesk/rustdesk) (1.4.9) como base, añadiendo funcionalidades para el preste de servicios de soporte remoto. <br>Específicamente:<br>
 
 - RustDesk: <br> commit <`6c578292e8ebbbec708b76986ba8c4bc7c509747`> `Windows`<br> commit <`91c9fccbb0f7bfe5f11644d5fbdec9b23fa10540`> `MacOS` 
 
@@ -47,7 +47,7 @@ libs/hbb_common (driver-390-g29cf7cb)
 
 Para esto se necesitaría seguir las instrucciones del propio repositorio de rustdesk, que mencionaré aquí en caso de que cambien, para compilar la aplicación usando Flutter (No Sciter):
 
-Para efectos prácticos se utilizará la herramienta [`Git Bash`](https://git-scm.com/install/windows) para el cliente de Windows.
+Para efectos prácticos se utilizará la herramienta **Git Bash**[<img src="/.img/external-link.png" alt="External Link" width="18" heigth="18">](https://git-scm.com/install/windows) para el cliente de Windows.
 
 Las herramientas base para compilar el programa, obviando la anterior mencionada, serán:
 ----
