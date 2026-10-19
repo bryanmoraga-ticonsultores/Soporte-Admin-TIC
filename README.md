@@ -91,7 +91,7 @@ Aquí abajo estarán los pasos a realizar para Windows y Mac (Linux en proceso)
 </p>
 
 <p align="center">
-    <br>[<a href="/docs/ES/COMPILAR_WIN.md">Compilar en Windows (Sin modificaciones)</a>] | [<a href="/docs/ES/COMPILAR_MAC.md">Compilar en MacOS (Sin modificaciones)</a>] | <a href="/docs/ES/COMPILAR_LINUX.md">Compilar en Linux (Sin modificaciones)</a>
+    <br>[<a href="/docs/ES/COMPILAR_WIN.md">Compilar en Windows (Sin modificaciones)</a>] | [<a href="/docs/ES/COMPILAR_MAC.md">Compilar en MacOS (Sin modificaciones)</a>] | <a href="/docs/ES/COMPILAR_LINUX.md">Compilar en Linux (Sin modificaciones)(WIP)</a>
 </p>
 
 # Cambios al código original
@@ -368,7 +368,9 @@ Los tamaños son:
     <img src="/.img/InkScape_7.png">
 </p>
 
-**`/flutter/pubspec.yaml`**
+----
+
+**`/flutter/pubspec.yaml`**[^3]
 ```yaml
 dependencies:
 # (...)
@@ -376,7 +378,7 @@ dependencies:
     web_socket_channel: ^2.1.4 # +
     windows_taskbar: ^1.1.2
 ```
-[^3]
+
 
 **`/flutter/windows/runner/main.cpp`**
 ```cpp
