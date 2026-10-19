@@ -79,7 +79,7 @@ Aquí abajo estarán los pasos a realizar para Windows y Mac (Linux en proceso)
 <p align="center">
     <img src="https://upload.wikimedia.org/wikipedia/commons/8/87/Windows_logo_-_2021.svg?utm_source=es.wikipedia.org&utm_campaign=imageinfo&utm_content=original" alt="Windows Logo" width="100" height="100">
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    <img src="https://thumb.wikimedia.org/wikipedia/commons/thumb/1/1b/Apple_logo_grey.svg/960px-Apple_logo_grey.svg.png?utm_source=es.wikipedia.org&utm_campaign=imageinfo&utm_content=thumbnail" alt="Apple Logo" width="100" height="120">
+    <img src="/.img/Apple_logo_grey.svg" alt="Apple Logo" width="100" height="120">
     <br>[<a href="/docs/ES/COMPILAR_WIN.md">Compilar en Windows (Sin modificaciones)</a>] | [<a href="/docs/ES/COMPILAR_MAC.md">Compilar en MacOS (Sin modificaciones)</a>]
 </p>
 
