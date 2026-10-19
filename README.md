@@ -321,7 +321,29 @@ Luego, debe crearse el gráfico vectorial del Logo (`.svg`), usando el programa 
 
 Para esto, se abre el programa, y dentro de este se abre la imagen del logo (En este caso, `Logo.png`).
 
-Una vez allí
+<p align="center"> 
+    <img src="/.img/InkScape_1.png">
+</p>
+
+Importar con las configuraciones por defecto.
+
+<p align="center"> 
+    <img src="/.img/InkScape_2.png">
+</p>
+
+Una vez allí, seleccionar el logo, con el click principal. (Se notará con un recuadro interlineado.)
+
+<p align="center"> 
+    <img src="/.img/InkScape_3.png">
+</p>
+
+Ir a la sección 'Trayecto' y seleccionar 'Vectorizar mapa de bits'. *(Dependiendo de la traducción, puede ser 'Trazado' y 'Trazado de mapa de bits' respectivamente)*
+
+<p align="center"> 
+    <img src="/.img/InkScape_4.png">
+</p>
+
+
 
 **`/flutter/pubspec.yaml`**
 ```yaml
