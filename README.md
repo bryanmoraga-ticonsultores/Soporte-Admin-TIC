@@ -72,7 +72,7 @@ vcpkg | commit fijo | Maneja las librerías necesarias (`libvpx`, `opus`, `libyu
 Flutter (Vía FVM *(Flutter Version Manager)*) | Flutter: `3.24.5`.<br>FVM: la más reciente | RustDesk depende de una versión de Flutter específica, y FVM permite el manejo entre diferentes versiones.<br> Versión FVM a la fecha(6/Oct/26): `4.3.0` |
 ----
 
-#Compilar Rustdesk (Sin Modificar)
+# Compilar Rustdesk (Sin Modificar)
 
 Aquí abajo estarán los pasos a realizar para Windows y Mac (Linux en proceso)
 
