@@ -2,17 +2,15 @@ Details are still being finalized, this is *not* the final README
 # Índice
 1. [Información](https://github.com/bryanmoraga-ticonsultores/Soporte-Admin-TIC#información)
 
-2. [Compilar Rustdesk (Sin Modificar) en Windows](/docs/ES/COMPILAR_WIN.md)
+2. [Compilar Rustdesk (Sin Modificar)](https://github.com/bryanmoraga-ticonsultores/Soporte-Admin-TIC#compilar-rustdesk-(sin-modificar))
 
-3. [Compilar Rustdesk (Sin Modificar) en Mac](/docs/ES/COMPILAR_MAC.md) 
+3. [Aplicar cambios en Windows (WIP)]()
 
-4. [Aplicar cambios en Windows (WIP)]()
-
-    - 4.1 [Cambios aplicados (WIP)]()
+    - 3.1 [Cambios aplicados (WIP)]()
     
-5. [Aplicar cambios en MacOS (WIP)](https://github.com/bryanmoraga-ticonsultores/Soporte-Admin-TIC#aplicar-cambios-en-macos)
+4. [Aplicar cambios en MacOS (WIP)](https://github.com/bryanmoraga-ticonsultores/Soporte-Admin-TIC#aplicar-cambios-en-macos)
 
-    - 5.1 [Cambios aplicados (WIP)](https://github.com/bryanmoraga-ticonsultores/Soporte-Admin-TIC#cambios-aplicados-1)
+    - 4.1 [Cambios aplicados (WIP)](https://github.com/bryanmoraga-ticonsultores/Soporte-Admin-TIC#cambios-aplicados-1)
 
 # Información
 ## Soporte-Admin-TIC
@@ -74,6 +72,8 @@ vcpkg | commit fijo | Maneja las librerías necesarias (`libvpx`, `opus`, `libyu
 Flutter (Vía FVM *(Flutter Version Manager)*) | Flutter: `3.24.5`.<br>FVM: la más reciente | RustDesk depende de una versión de Flutter específica, y FVM permite el manejo entre diferentes versiones.<br> Versión FVM a la fecha(6/Oct/26): `4.3.0` |
 ----
 
+#Compilar Rustdesk (Sin Modificar)
+
 Aquí abajo estarán los pasos a realizar para Windows y Mac (Linux en proceso)
 
 <p align="center">
@@ -81,12 +81,18 @@ Aquí abajo estarán los pasos a realizar para Windows y Mac (Linux en proceso)
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     <img src="/.img/Apple_logo_grey.svg" alt="Apple Logo" width="100" height="120">
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    <img src="/.img/Tux.svg" alt="Linux Logo" width="100" height="120" title="Tux, la mascota de Linux, por Larry Ewing, utilizando el programa GIMP."><a href="https://www.home.unix-ag.org/simon/penguin/README">&copy;</a>
+    <img src="/.img/Tux.svg" alt="Linux Logo" width="100" height="120" title="Tux, la mascota de Linux, por Larry Ewing, utilizando el programa GIMP."><a href="https://www.home.unix-ag.org/simon/penguin/README" title="Copyright Page of Tux">&copy;</a>
 </p>
 
 <p align="center">
     <br>[<a href="/docs/ES/COMPILAR_WIN.md">Compilar en Windows (Sin modificaciones)</a>] | [<a href="/docs/ES/COMPILAR_MAC.md">Compilar en MacOS (Sin modificaciones)</a>] | <a href="/docs/ES/COMPILAR_LINUX.md">Compilar en Linux (Sin modificaciones)</a>
 </p>
+
+##Cambio general
+**`src/lang/es.rs`** Se corrige un error de traducción
+```rust
+("Untagged", "Sin etiquetar"), // El código original contiene "itiquetar"
+```
 
 ## Aplicar Cambios en Windows
 ### Cambios aplicados
@@ -106,11 +112,6 @@ FileDescription = "NombreDeApp"
 ### Cambios aplicados
 #### Personalizar nombre y bundle ID
 Los cambios aquí presentes son los que han sido aplicados con efecto de personalizar y/o adaptar el software RustDesk a necesidades específicas.
-
-**`src/lang/es.rs`** Se corrige un error de traducción
-```rust
-("Untagged", "Sin etiquetar"), // El código original contiene "itiquetar"
-```
 
 **`flutter/macos/Runner/Configs/AppInfo.xcconfig`**
 ```
