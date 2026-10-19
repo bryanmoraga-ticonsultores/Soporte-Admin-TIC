@@ -343,7 +343,30 @@ Ir a la sección 'Trayecto' y seleccionar 'Vectorizar mapa de bits'. *(Dependien
     <img src="/.img/InkScape_4.png">
 </p>
 
+En 'Modo de detección', puede variar dependiendo de la imagen, más normalmente con 'Autotrazo' debería funcionar.
 
+<p align="center"> 
+    <img src="/.img/InkScape_5.png">
+</p>
+
+Al aplicar se creará el gráfico vectorizado encima de la imagen. Puede identificar cuál es la imagen vectorizada con la información expuesta en la barra de abajo, y en el nombre del archivo generado.
+
+<p align="center">
+    <img src="/.img/InkScape_6.png">
+</p>
+
+Ya para finalizar, seleccionar la opción 'Inkscape SVG', escoger la carpeta de destino, ajustar el tamaño para cada `.svg` y exportar la selección.
+
+Los tamaños son:
+```
+/res/scalable.svg           =>  32x32
+/res/logo.svg               =>  26x26
+/flutter/assets/icon.svg    =>  1024x1024
+```
+
+<p align="center">
+    <img src="/.img/InkScape_7.png">
+</p>
 
 **`/flutter/pubspec.yaml`**
 ```yaml
