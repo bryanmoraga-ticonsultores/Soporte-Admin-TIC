@@ -8,13 +8,13 @@ Details are still being finalized, this is *not* the final README
 
     - 3.1 [Cambios Generales](#cambios-generales)
 
-    - 3.2 [Aplicar cambios en Windows (WIP)](#aplicar-cambios-en-windows)
+    - 3.2 [Aplicar cambios en Windows](#aplicar-cambios-en-windows)
 
-    - 3.3 [Cambios aplicados (WIP)](#cambios-aplicados)
+    - 3.3 [Cambios aplicados](#cambios-aplicados)
     
-    - 3.4 [Aplicar cambios en MacOS (WIP)](#aplicar-cambios-en-macos)
+    - 3.4 [Aplicar cambios en MacOS](#aplicar-cambios-en-macos)
 
-    - 3.5 [Cambios aplicados (WIP)](#cambios-aplicados-1)
+    - 3.5 [Cambios aplicados](#cambios-aplicados-1)
 
 # Información
 ## Soporte-Admin-TIC
