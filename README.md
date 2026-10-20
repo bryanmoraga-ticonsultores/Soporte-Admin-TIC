@@ -385,7 +385,9 @@ dependencies:
     web_socket_channel: ^2.1.4 # +
     windows_taskbar: ^1.1.2
 ```
-
+web_socket_channel: Librería para el uso de la función personalizada, en este caso, se encarga de recibir el mensaje de solicitud de asistencia.
+windows_taskbar: Se agregó para manejar el parpadeo de atención de la aplicación.
+win32: Se fijó una versión específica debido a un conflicto de compatibilidad con las librerías ya mencionadas en esta sección.
 
 **`/flutter/windows/runner/main.cpp`**
 ```cpp
