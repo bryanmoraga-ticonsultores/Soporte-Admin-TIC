@@ -298,6 +298,7 @@ pub const RS_PUB_KEY: &str = "<KEY_SERVIDOR>";
 ```
 
 ### Cambios Originales
+----
 
 **`/flutter/lib/desktop/pages/connection_footer.dart`**<br>
 Este es un módulo completamente nuevo, el cual sólo añade un 'pie de página', cuya función es informar a los usuarios acerca de los Términos de uso de esta aplicación personalizada y sobre la Privacidad de los datos.
