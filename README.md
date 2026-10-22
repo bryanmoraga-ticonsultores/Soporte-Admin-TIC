@@ -521,20 +521,6 @@ OriginalFilename = "Nombre-de-App.exe"
 ### Cambios aplicados
 Los cambios aquí presentes son los que han sido aplicados con efecto de personalizar y/o adaptar el software RustDesk a necesidades específicas.
 
-**`/flutter/macos/Runner/Configs/AppInfo.xcconfig`**
-```
-PRODUCT_NAME = <NombreDeApp>
-PRODUCT_BUNDLE_IDENTIFIER = <tu.identificador.unico>
-PRODUCT_COPYRIGHT = Copyright © 2026 Purslane Tech Pte. Ltd. Modifications by TiConsultores SpA. All rights reserved.
-```
-> `<NombreDeApp>` no debe contener espacios, sólo caracteres alfanuméricos y guiones(`_`, `-`)
-
-**`/flutter/macos/Runner.xcodeproj/project.pbxproj`** — hay 3 ocurrencias hardcodeadas que sobreescriben al `.xcconfig` si no se cambian.
-<br>Con esto cambia esas 3 ocurrencias del archivo:
-```bash
-sed -i '' 's/PRODUCT_BUNDLE_IDENTIFIER = com.carriez.rustdesk;/PRODUCT_BUNDLE_IDENTIFIER = <tu.identificador.unico>;/g' flutter/macos/Runner.xcodeproj/project.pbxproj
-```
-
 **`/flutter/macos/Runner/AppIcon.icns`** Este es el ícono que utilizará la `.app`
 Para crear uno, se requiere una carpeta del mismo nombre, `AppIcon.iconset` y una imagen del ícono deseado en 10 tamaños.<br>Aquí un pequeño script usando una imagen png del ícono deseado de dimensiones `1024x1024 px`, asumiendo el nombre del ícono `Icon.png`:
 ```src
@@ -566,6 +552,21 @@ En esta carpeta se deben ajustar `mac-icon.png`, `mac-tray-dark-x2.png` y `mac-t
 `mac-icon.png` | `mac-tray-dark-x2.png` | `mac-tray-light-x2.png`
 ----|----|----|
 `1024x1024 px` | `60x60 px` | `48x48 px` |
+
+
+**`/flutter/macos/Runner/Configs/AppInfo.xcconfig`**
+```
+PRODUCT_NAME = <NombreDeApp>
+PRODUCT_BUNDLE_IDENTIFIER = <tu.identificador.unico>
+PRODUCT_COPYRIGHT = Copyright © 2026 Purslane Tech Pte. Ltd. Modifications by TiConsultores SpA. All rights reserved.
+```
+> `<NombreDeApp>` no debe contener espacios, sólo caracteres alfanuméricos y guiones(`_`, `-`)
+
+**`/flutter/macos/Runner.xcodeproj/project.pbxproj`** — hay 3 ocurrencias hardcodeadas que sobreescriben al `.xcconfig` si no se cambian.
+<br>Con esto cambia esas 3 ocurrencias del archivo:
+```bash
+sed -i '' 's/PRODUCT_BUNDLE_IDENTIFIER = com.carriez.rustdesk;/PRODUCT_BUNDLE_IDENTIFIER = <tu.identificador.unico>;/g' flutter/macos/Runner.xcodeproj/project.pbxproj
+```
 
 
 **`build.py`** Se agrega una función para obtener el nombre de la aplicación de forma dinámica.
