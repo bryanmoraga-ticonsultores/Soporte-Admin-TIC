@@ -22,7 +22,7 @@ class ConnectionFooter extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       children: [
         InkWell(
-          onTap: () => openUrl('https://ticonsultores.cl/'),
+          onTap: () => openUrl('https://ticonsultores.cl/terms.html'),
           child: Text('Términos de Uso', style: linkStyle),
         ),
         Text(' - ', style: style),
