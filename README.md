@@ -8,6 +8,8 @@ Details are still being finalized, this is *not* the final README
 
     - 3.1 [Cambios Generales](#cambios-generales)
 
+       - 3.1.1 [Cambios Originales](#cambios-originales)
+
     - 3.2 [Aplicar cambios en Windows](#aplicar-cambios-en-windows)
 
     - 3.3 [Cambios aplicados](#cambios-aplicados)
@@ -294,6 +296,27 @@ Y para que se conecte a un servidor personalizado propio
 pub const RENDEZVOUS_SERVERS: &[&str] = &["<IP_SERVIDOR>"];
 pub const RS_PUB_KEY: &str = "<KEY_SERVIDOR>";
 ```
+
+### Cambios Originales
+
+**`/flutter/lib/desktop/pages/connection_footer.dart`**<br>
+Este es un módulo completamente nuevo, el cual sólo añade un 'pie de página', cuya función es informar a los usuarios acerca de los Términos de uso de esta aplicación personalizada y sobre la Privacidad de los datos.
+
+![](.img/footer_page.png)
+>Adopta el widget de conexión, y al extremo derecho están los enlaces a lo mencionado anteriormente
+----
+
+**`/flutter/lib/desktop/pages/support_notifications.dart`**
+Este es un módulo, también completamente nuevo, el cual añade una sección a modo de widget en donde se muestran las notificaciones de solicitud de asistencia por orden de llegada, mostrando el ID del solicitante, la hora de la solicitud y un mensaje (opcional) en el cual el solicitante detalla su problemática.
+
+![](.img/support_widget.png)
+>Así es normalmente, cuando no hay solicitudes
+----
+
+![](.img/support_request.png)
+>Y así cuando llega una solicitud de asistencia
+
+El botón de reconexión reutiliza *`RefreshWidget`*, ya presente en *`peer_tab_page.dart`*, para la animación de giro. El botón de conexión llama a la función original de RustDesk, sin modificarla.
 
 ## Aplicar Cambios en Windows
 ### Cambios aplicados
@@ -594,24 +617,6 @@ Forzar la conexión al servidor personalizado
   await bind.mainSetOption(key: 'key', value: "<KEY_SERVIDOR>");
 ```
 
-**`/flutter/lib/desktop/pages/connection_footer.dart`**<br>
-Este es un módulo completamente nuevo, el cual sólo añade un 'pie de página', cuya función es informar a los usuarios acerca de los Términos de uso de esta aplicación personalizada y sobre la Privacidad de los datos.
-
-![](.img/footer_page.png)
->Adopta el widget de conexión, y al extremo derecho están los enlaces a lo mencionado anteriormente
-----
-
-**`/flutter/lib/desktop/pages/support_notifications.dart`**
-Este es un módulo, también completamente nuevo, el cual añade una sección a modo de widget en donde se muestran las notificaciones de solicitud de asistencia por orden de llegada, mostrando el ID del solicitante, la hora de la solicitud y un mensaje (opcional) en el cual el solicitante detalla su problemática.
-
-![](.img/support_widget.png)
->Así es normalmente, cuando no hay solicitudes
-----
-
-![](.img/support_request.png)
->Y así cuando llega una solicitud de asistencia
-
-El botón de reconexión reutiliza *`RefreshWidget`*, ya presente en *`peer_tab_page.dart`*, para la animación de giro. El botón de conexión llama a la función original de RustDesk, sin modificarla.
 
 
 [^1]: External-link icon created by Dixit Lakhani_02 - Flaticon
