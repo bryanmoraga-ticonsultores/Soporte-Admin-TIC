@@ -286,6 +286,27 @@ Widget buildHelpCards(String updateUrl) {
     }
 ```
 
+**`/flutter/lib/common.dart`**
+```dart
+    // (...)
+    // ~ Ln. 2984
+    /// from local options
+  ServerConfig.fromOptions(Map<String, dynamic> options)
+      : idServer = options['<IP_SERVIDOR>'] ?? '',
+        relayServer = options['<IP_SERVIDOR>'] ?? '',
+        apiServer = options['https://<IP_SERVIDOR>'] ?? '',
+        key = options['<KEY_SERVIDOR>'] ?? '';
+
+
+    // (...)
+    // should set one by one
+    await bind.mainSetOption(
+        key: 'custom-rendezvous-server', value: '<IP_SERVIDOR>');
+    await bind.mainSetOption(key: 'relay-server', value: '<IP_SERVIDOR>');
+    await bind.mainSetOption(key: 'api-server', value: 'htps://<IP_SERVIDOR>');
+    await bind.mainSetOption(key: 'key', value: '<KEY_SERVIDOR>');
+```
+
 **`/libs/hbb_common/src/config.rs`** 
 Para que los textos de la UI usen el nombre de la app:
 ```rust
@@ -606,17 +627,6 @@ dependencies:
     web_socket_channel: ^2.4.5
 (...)
 
-```
-
-**`/flutter/lib/common.dart`**
-Forzar la conexión al servidor personalizado
-```dart
-// should set one by one
-  await bind.mainSetOption(
-      key: 'custom-rendezvous-server', value: "<IP_SERVIDOR>");
-  await bind.mainSetOption(key: 'relay-server', value: "<IP_SERVIDOR>");
-  await bind.mainSetOption(key: 'api-server', value: "https://<IP_SERVIDOR>");
-  await bind.mainSetOption(key: 'key', value: "<KEY_SERVIDOR>");
 ```
 
 
