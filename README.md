@@ -1,4 +1,7 @@
-Details are still being finalized, this is *not* the final README
+> [!Caution]
+> Esta es la versión para administradores o quienes presten servicios de soporte remoto <br>
+> Para la versión de clientes, visitar: <br>
+> Soporte Remoto Clientes [<img src="/.img/external-link.png" alt="External Link" title="Abrir en una nueva pestaña" width="18" heigth="18">](https://github.com/bryanmoraga-ticonsultores/Soporte-Cliente-TIC)
 # Índice
 1. [Información](#información)
 
